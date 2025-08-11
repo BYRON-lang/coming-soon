@@ -73,7 +73,7 @@ function ScrollingGallery() {
   return (
     <div className="w-full overflow-hidden">
       <div 
-        className="relative w-[1280px] h-[80vh] max-h-[90vh]"
+        className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] max-h-[90vh] mx-auto"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={handleTouchStart}
@@ -88,37 +88,51 @@ function ScrollingGallery() {
             fill
             className="object-cover transition-all duration-500 ease-in-out"
             priority
-            sizes="100vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1280px"
           />
           
-          {/* Navigation Arrows */}
+          {/* Navigation Arrows - Hidden on mobile, shown on md and up */}
           <button 
-            onClick={() => setCurrentIndex(prev => (prev - 1 + designImages.length) % designImages.length)}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-colors z-10"
+            onClick={(e) => {
+              e.stopPropagation();
+              setCurrentIndex(prev => (prev - 1 + designImages.length) % designImages.length);
+            }}
+            className="hidden md:flex absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 md:p-3 rounded-full hover:bg-black/70 transition-colors z-10"
             aria-label="Previous image"
           >
-            ←
+            <span className="text-xl">←</span>
           </button>
+          
           <button 
-            onClick={() => setCurrentIndex(prev => (prev + 1) % designImages.length)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-colors z-10"
+            onClick={(e) => {
+              e.stopPropagation();
+              setCurrentIndex(prev => (prev + 1) % designImages.length);
+            }}
+            className="hidden md:flex absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 md:p-3 rounded-full hover:bg-black/70 transition-colors z-10"
             aria-label="Next image"
           >
-            →
+            <span className="text-xl">→</span>
           </button>
           
           {/* Dots Indicator */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+          <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10">
             {designImages.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-colors ${
-                  index === currentIndex ? 'bg-white' : 'bg-white/50'
-                }`}
-                aria-label={`Go to image ${index + 1}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentIndex(index);
+                }}
+                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${index === currentIndex ? 'bg-white scale-125' : 'bg-white/50'}`}
+                aria-label={`View image ${index + 1} of ${designImages.length}`}
+                aria-current={index === currentIndex ? 'true' : 'false'}
               />
             ))}
+          </div>
+          
+          {/* Image Counter */}
+          <div className="absolute bottom-2 left-2 bg-black/50 text-white text-xs px-2 py-1 rounded-md z-10">
+            {currentIndex + 1} / {designImages.length}
           </div>
         </div>
       </div>

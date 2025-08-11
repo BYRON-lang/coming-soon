@@ -48,37 +48,37 @@ export default function TopBanner() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
-      </div>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="flex items-center justify-center space-x-3">
-          <div className="flex-shrink-0 flex items-center">
-            <FaRocket className="w-5 h-5 mr-2" />
-            <span className="font-bold">COMING SOON:</span>
-          </div>
-          
-          <div className="flex-1 text-center">
-            <div className="inline-flex items-center space-x-3">
-              <div className="flex-shrink-0">
-                {feature.icon}
-              </div>
-              <div className="text-left">
-                <div className="font-bold">{feature.title}</div>
-                <div className="text-sm opacity-90">{feature.description}</div>
-              </div>
+      <div className="container mx-auto px-3 sm:px-4">
+        <div className="flex items-center justify-center">
+          <div className="flex items-center space-x-2 sm:space-x-3 max-w-4xl mx-auto">
+            <div className="flex-shrink-0">
+              <FaRocket className="w-4 h-4 sm:w-5 sm:h-5" />
+            </div>
+            <div className="text-center sm:text-left overflow-hidden">
+              <div className="text-sm sm:text-base font-bold truncate">{feature.title}</div>
+              <div className="text-xs sm:text-sm opacity-90 truncate">{feature.description}</div>
+            </div>
+            
+            {/* Mobile indicators */}
+            <div className="sm:hidden flex items-center space-x-1 ml-2">
+              {upcomingFeatures.map((_, index) => (
+                <span 
+                  key={index}
+                  className={`block w-1.5 h-1.5 rounded-full ${index === currentFeature ? 'bg-black' : 'bg-black/30'}`}
+                />
+              ))}
             </div>
           </div>
         </div>
       </div>
       
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-black/10">
+      {/* Progress bar */}
+      <div className="absolute bottom-0 left-0 right-0 h-0.5 sm:h-1 bg-black/10">
         <div 
           className="h-full bg-black/30 transition-all duration-1000 ease-linear"
           style={{
             width: isHovered ? '100%' : '0%',
-            transition: isHovered ? 'none' : 'width 3s linear'
+            transition: isHovered ? 'none' : 'width 3s linear',
           }}
         />
       </div>

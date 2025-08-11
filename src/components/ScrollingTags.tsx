@@ -61,18 +61,22 @@ export default function ScrollingTags() {
   }, []);
 
   return (
-    <div className="w-screen overflow-hidden">
+    <div className="w-full bg-yellow-400 py-3 sm:py-4 overflow-hidden" ref={containerRef}>
       <div 
         ref={scrollerRef}
-        className="flex items-center gap-8 whitespace-nowrap px-4"
+        className="flex items-center"
+        style={{
+          display: 'inline-flex',
+          whiteSpace: 'nowrap',
+        }}
       >
         {duplicatedTags.map((tag, index) => (
-          <span 
-            key={`${tag}-${index}`}
-            className="inline-block text-black font-bold text-base whitespace-nowrap"
+          <div 
+            key={index}
+            className="mx-1 sm:mx-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-black text-white rounded-full text-xs sm:text-sm font-medium whitespace-nowrap"
           >
             {tag}
-          </span>
+          </div>
         ))}
       </div>
     </div>

@@ -64,14 +64,40 @@ export const metadata: Metadata = {
   manifest: '/site.webmanifest',
 };
 
+// Viewport configuration for responsive design
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: 'cover',
+  themeColor: '#141414',
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className} style={{ backgroundColor: '#141414', margin: 0, padding: 0, minHeight: '100vh' }}>
+    <html lang="en" className="scroll-smooth">
+      <head>
+        {/* Preconnect to external domains for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Preload critical resources */}
+        <link rel="preload" href="/fonts/Inter.var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+      </head>
+      
+      <body 
+        className={`${inter.className} min-h-screen bg-[#141414] text-white antialiased`}
+        style={{
+          textRendering: 'optimizeLegibility',
+          WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale',
+        }}
+      >
         {children}
       </body>
     </html>
