@@ -67,8 +67,10 @@ export default function Home() {
               </p>
             </div>
             
-            <div className="w-full mt-6 sm:mt-8 md:mt-10 lg:mt-12">
-              <ScrollingGallery />
+            <div className="w-full max-w-6xl mx-auto mt-6 sm:mt-8 md:mt-10 lg:mt-12 px-4 sm:px-6">
+              <div className="relative w-full aspect-video bg-black/20 rounded-lg overflow-hidden">
+                <ScrollingGallery />
+              </div>
             </div>
             
             <div className="mt-8 sm:mt-10 md:mt-12 lg:mt-16">

@@ -73,7 +73,7 @@ function ScrollingGallery() {
   return (
     <div className="w-full overflow-hidden">
       <div 
-        className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] max-h-[90vh] mx-auto"
+        className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] max-h-[90vh] mx-auto flex items-center justify-center"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={handleTouchStart}
@@ -81,15 +81,17 @@ function ScrollingGallery() {
         onTouchEnd={handleTouchEnd}
       >
         {/* Current Image */}
-        <div className="relative w-full h-full">
-          <Image
-            src={designImages[currentIndex]}
-            alt={`Design ${currentIndex + 1}`}
-            fill
-            className="object-cover transition-all duration-500 ease-in-out"
-            priority
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1280px"
-          />
+        <div className="relative w-full h-full max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto">
+          <div className="relative w-full h-full">
+            <Image
+              src={designImages[currentIndex]}
+              alt={`Design ${currentIndex + 1}`}
+              fill
+              className="object-contain transition-all duration-500 ease-in-out"
+              priority
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, (min-width: 1280px) 1280px"
+            />
+          </div>
           
           {/* Navigation Arrows - Hidden on mobile, shown on md and up */}
           <button 
