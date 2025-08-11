@@ -4,9 +4,64 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const SITE_URL = 'https://gridrr.com';
+const SITE_NAME = 'Gridrr';
+const SITE_DESCRIPTION = 'Discover and showcase creative design work on Gridrr - The platform for designers to share their portfolio and get inspired.';
+
 export const metadata: Metadata = {
-  title: "My App",
-  description: "A blank Next.js application",
+  title: {
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [
+    'design', 'portfolio', 'showcase', 'designers', 'creatives',
+    'ui/ux', 'graphic design', 'web design', 'design community'
+  ],
+  authors: [{ name: 'Gridrr Team' }],
+  creator: 'Gridrr',
+  publisher: 'Gridrr',
+  metadataBase: new URL(SITE_URL),
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: SITE_NAME,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    images: ['/twitter-image.jpg'],
+    creator: '@gridrrofficial',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({
